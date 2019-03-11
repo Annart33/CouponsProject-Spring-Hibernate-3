@@ -305,6 +305,10 @@ public class CouponDao {
 		try {
 			CustomerEntity customer = this.customerDao.getCustomerByCustomerId(customerId);
 			coupon.addPurchesers(customer);
+			Query query = entityManager.createNativeQuery("insert into couponCustomer (couponId, customerId) values (?,?)");
+			query.setParameter(1, coupon.getCouponId());
+			query.setParameter(2, customerId);
+			query.executeUpdate();
 		} catch (Exception e) {
 			throw new ApplicationException(e, ErrorType.SYSTEM_ERROR, "Error in CouponDao, purchase(); FAILED");
 
