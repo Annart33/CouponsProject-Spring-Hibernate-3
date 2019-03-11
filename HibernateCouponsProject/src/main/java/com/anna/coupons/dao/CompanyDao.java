@@ -92,7 +92,7 @@ public class CompanyDao {
 					"SELECT company.companyId FROM CompanyEntity as company WHERE companyEmail =:companyEmail AND companyPassword =:companyPassword");
 			query.setParameter("companyEmail", companyEmail);
 			query.setParameter("companyPassword", companyPassword);
-			Long companyId =  (Long) query.getSingleResult();
+			Long companyId = (Long) query.getSingleResult();
 
 			return companyId;
 

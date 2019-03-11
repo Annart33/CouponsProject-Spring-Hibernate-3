@@ -36,10 +36,9 @@ public class CouponEntity {
 		this.couponImage = couponImage;
 		this.companyId = companyId;
 	}
-	
-	public CouponEntity(String couponTitle, String couponStartDate, String couponEndDate,
-			int couponAmount, CouponType couponType, String couponMessage, int couponPrice, String couponImage,
-			long companyId) {
+
+	public CouponEntity(String couponTitle, String couponStartDate, String couponEndDate, int couponAmount,
+			CouponType couponType, String couponMessage, int couponPrice, String couponImage, long companyId) {
 		this.couponTitle = couponTitle;
 		this.couponStartDate = couponStartDate;
 		this.couponEndDate = couponEndDate;
@@ -83,32 +82,19 @@ public class CouponEntity {
 	private long companyId;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "couponcustomer",
-	joinColumns = {
-			@JoinColumn(
-					name = "CouponId",
-					referencedColumnName = "couponId"
-					)
-	},
-	inverseJoinColumns = {
-			@JoinColumn(
-					name = "CustomerId",
-					referencedColumnName = "customerId"
-					)
-	}
-			)
+	@JoinTable(name = "couponcustomer", joinColumns = {
+			@JoinColumn(name = "CouponId", referencedColumnName = "couponId") }, inverseJoinColumns = {
+					@JoinColumn(name = "CustomerId", referencedColumnName = "customerId") })
 	@JsonIgnore
 	private List<CustomerEntity> purchasers;
-	
+
 	public void addPurchesers(CustomerEntity purcheser) {
 		this.purchasers.add(purcheser);
 	}
 
-	
 	public boolean removePurchesers(CustomerEntity purcheser) {
 		return this.purchasers.remove(purcheser);
 	}
-	
 
 	public List<CustomerEntity> getPurchasers() {
 		return purchasers;
@@ -117,11 +103,11 @@ public class CouponEntity {
 	public void setPurchasers(List<CustomerEntity> purchasers) {
 		this.purchasers = purchasers;
 	}
-	
+
 	public void reduceAmountByOne() {
 		couponAmount--;
 	}
-	
+
 	public void increaseAmountByOne() {
 		couponAmount++;
 	}
